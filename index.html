@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #06b8c4, #0044ff);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .game {
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .game:hover {
+            transform: scale(1.05);
+        }
+
+        .game img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .game h3 {
+            padding: 10px 0;
+            background: #333;
+            margin: 0;
+        }
+
+        .game button {
+            background: #06b8c4;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .game button:hover {
+            background: #0044ff;
+        }
+
+        footer {
+            background: #222;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">GameZone</div><br>
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fa-solid fa-circle-info" style="color: #ofofof;"></i> About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="game-grid">
+            <div class="game">
+                <img src="image/fbird.jpg" alt="Flappy Bird">
+                <h3>Flappy Bird</h3>
+               <a href="bird/index.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+
+            </div>
+            <div class="game">
+                <img src="image/boll.jpg" alt="Jumping Ball">
+                <h3>Jumping Ball</h3>
+                 <a href="jumping_ball/jumpingball.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div>
+            <div class="game">
+                <img src="image/car.jpg" alt="Car Racing">
+                <h3>Car Racing</h3>
+                 <a href="car/black.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div>
+            <div class="game">
+                <img src="image/trex.jpg" alt="T-Rex">
+                <h3>T-Rex</h3>
+                 <a href="trex/trex.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div>
+            <div class="game">
+                <img src="image/brick.jpg" alt="brick_break">
+                <h3>Break Break</h3>
+                 <a href="brick_break/Brick_brake.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div>
+            <div class="game">
+                <img src="image/tic.jpg" alt="Tic Tac Toe">
+                <h3>Tic Tac Toe</h3>
+                 <a href="tic_tac/tic.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div><div class="game">
+                <img src="image/soon.jpg" alt="Coming Soon">
+                <h3>Coming Soon</h3>
+                 <a href="demo.html" style="text-decoration: none; color: white;">
+    <button>Play</button>
+</a>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 GameZone. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        gsap.from(".game", {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.2
+        });
+    </script>
+</body>
+</html>

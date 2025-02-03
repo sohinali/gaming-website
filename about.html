@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .about-container {
+            max-width: 90%;
+            width: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .form input, .form textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form button {
+            padding: 10px;
+            background: #4facfe;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form button:hover {
+            background: #00f2fe;
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-container">
+        <h1>About Us</h1>
+        <p>Tell us more about you!</p>
+        <form id="contact-form" class="form" onsubmit="sendEmail(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <script>
+        // Initialize EmailJS with your user ID
+        emailjs.init("f-gJOxg2S4x2OLINk");
+
+       function sendEmail(event) {
+    event.preventDefault();
+
+    // Send form data using EmailJS
+    emailjs.sendForm('service_kvley18', 'template_geau133', event.target)
+        .then(function(response) {
+            alert("Your message has been sent!");
+            event.target.reset(); 
+        }, function(error) {
+            alert("There was an error sending your message.");
+        });
+}
+
+    </script>
+</body>
+</html>

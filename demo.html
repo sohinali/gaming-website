@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .coming-soon-container {
+            max-width: 90%;
+            width: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            font-size: 1.2rem;
+        }
+        .countdown div {
+            width: 45%;
+            margin-bottom: 10px;
+        }
+        .subscribe-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .subscribe-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .subscribe-form button {
+            padding: 10px;
+            background: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .subscribe-form button:hover {
+            background: #feb47b;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .countdown {
+                font-size: 1rem;
+            }
+            .countdown div {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="coming-soon-container">
+        <h1>Something Amazing is Coming Soon</h1>
+        <p>Stay tuned! We are launching very soon. Subscribe to get notified.</p>
+        
+        <div class="countdown">
+            <div><span id="days">00</span> Days</div>
+            <div><span id="hours">00</span> Hours</div>
+            <div><span id="minutes">00</span> Minutes</div>
+            <div><span id="seconds">00</span> Seconds</div>
+        </div>
+        
+        <form class="subscribe-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Notify Me</button>
+        </form>
+
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </div>
+</body>
+</html>
