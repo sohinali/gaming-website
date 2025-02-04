@@ -23,8 +23,6 @@ body {
     border: 5px solid black;
     display: block; /* Prevents a small gap below the canvas */
 }
-
-/* Popup styling */
 .popup {
     display: none; /* Hide the popup initially */
     position: fixed;
