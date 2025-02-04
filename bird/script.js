@@ -35,7 +35,7 @@ function createPipe() {
 }
 
 function drawBird() {
-    ctx.drawImage(birdImage, bird.x - bird.width/2, bird.y - bird.height/2, bird.width, bird.height); // Draw the image
+    ctx.drawImage(birdImage, bird.x - bird.width / 2, bird.y - bird.height / 2, bird.width, bird.height); // Draw the image
 }
 
 function drawPipes() {
@@ -68,10 +68,10 @@ function update() {
             pipes.splice(i, 1);
             i--;
         }
-    
+
         // Collision detection (using image dimensions)
-        if (bird.x + bird.width/2 > p.x && bird.x - bird.width/2 < p.x + p.width) {
-            if (bird.y - bird.height/2 < p.topHeight || bird.y + bird.height/2 > canvas.height - p.bottomHeight) {
+        if (bird.x + bird.width / 2 > p.x && bird.x - bird.width / 2 < p.x + p.width) {
+            if (bird.y - bird.height / 2 < p.topHeight || bird.y + bird.height / 2 > canvas.height - p.bottomHeight) {
                 gameOver();
             }
             if (!p.passed && bird.x > p.x + p.width) {
@@ -83,10 +83,8 @@ function update() {
     drawPipes();
     drawBird();
 
-    ctx.fillStyle = "black";
-    ctx.font = "20px Arial";
-    ctx.textAlign = "left";
-    ctx.fillText("Score: " + score, 10, 20);
+    // Update score in the DOM
+    document.getElementById('scoreText').innerText = "Score: " + score;
 
     if (gameRunning) {
         requestAnimationFrame(update);
@@ -97,7 +95,8 @@ function gameOver() {
     gameRunning = false;
     ctx.fillStyle = "red";
     ctx.font = "30px Arial";
-    ctx.fillText("Game Over!", canvas.width / 2 - 80, canvas.height / 2);
+    ctx.textAlign = "center"; // Center the Game Over text
+    ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2);
 }
 
 // Event listener for keyboard
@@ -105,7 +104,7 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning) {
         bird.velocity = -3;
     }
-    if(e.code === 'Space' && !gameRunning){
+    if (e.code === 'Space' && !gameRunning) {
         location.reload();
     }
 });
