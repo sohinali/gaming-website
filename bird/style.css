@@ -3,9 +3,19 @@ body {
     margin: 0;
     overflow: hidden; /* Prevent scrollbars */
     display: flex;
+    flex-direction: column; /* Stack canvas and score container vertically */
     justify-content: center; /* Center horizontally */
     align-items: center;     /* Center vertically */
     min-height: 100vh;      /* Ensure full viewport height */
+}
+
+#scoreContainer {
+    position: absolute;
+    top: 20px; /* Position it at the top */
+    text-align: center;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    color: black;
 }
 
 #gameCanvas {
