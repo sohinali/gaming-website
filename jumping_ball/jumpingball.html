@@ -19,29 +19,28 @@
     }
 
     button {
-  padding: 12px 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #fff;
-  background: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
 
-button:hover {
-  background: #0056b3;
-}
+    button:hover {
+      background: #0056b3;
+    }
 
-#backButton {
-  background: #28a745; /* Back button color */
-}
+    #backButton {
+      background: #28a745; /* Back button color */
+    }
 
-#backButton:hover {
-  background: #218838;
-}
-
+    #backButton:hover {
+      background: #218838;
+    }
 
     #gameCanvas {
       display: block;
@@ -77,7 +76,6 @@ button:hover {
       box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.5);
       z-index: 10;
     }
-
 
     .game-over h1 {
       font-size: 2.5rem;
@@ -136,131 +134,143 @@ button:hover {
     <h1>Game Over!</h1>
     <p>Your Score: <span id="finalScore"></span></p>
     <button id="restartButton">Restart</button>
-      <button id="backButton">Back</button>
+    <button id="backButton">Back</button>
   </div>
 
-  <script>const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const scoreDisplay = document.getElementById('score');
-const gameOverScreen = document.getElementById('gameOverScreen');
-const finalScore = document.getElementById('finalScore');
-const restartButton = document.getElementById('restartButton');
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('score');
+    const gameOverScreen = document.getElementById('gameOverScreen');
+    const finalScore = document.getElementById('finalScore');
+    const restartButton = document.getElementById('restartButton');
 
+    let ball = { x: 50, y: 300, radius: 15, dy: 0, jumpHeight: -15, gravity: 0.5 };
+    let obstacles = [];
+    let score = 0;
+    let isGameOver = false;
+    let obstacleSpeed = 5; // Initial speed of obstacles
 
-let ball = { x: 50, y: 300, radius: 15, dy: 0, jumpHeight: -20, gravity: 0.5 };
-let obstacles = [];
-let score = 0;
-let isGameOver = false;
+    // Add an obstacle every 2 seconds
+    setInterval(() => {
+      if (!isGameOver) {
+        const height = Math.random() * 100 + 50;
+        obstacles.push({ x: canvas.width, y: canvas.height - height, width: 20, height: height });
+      }
+    }, 2000);
 
-// Add an obstacle every 2 seconds
-setInterval(() => {
-  if (!isGameOver) {
-    const height = Math.random() * 100 + 50;
-    obstacles.push({ x: canvas.width, y: canvas.height - height, width: 20, height: height });
-  }
-}, 2000);
+    const backButton = document.getElementById('backButton');
 
-const backButton = document.getElementById('backButton');
+    // Back Button Logic
+    backButton.addEventListener('click', () => {
+      window.location.href = '../index.html'; // Replace with your desired URL
+    });
 
-// Back Button Logic
-backButton.addEventListener('click', () => {
-  // Redirect user to a different page or show a message
-  window.location.href = '../index.html'; // Replace with your desired URL
-});
+    // Handle ball jump
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && ball.y + ball.radius >= canvas.height) {
+        ball.dy = ball.jumpHeight;
+      }
+    });
 
+    // Handle touch event for mobile
+    window.addEventListener('touchstart', (e) => {
+      if (ball.y + ball.radius >= canvas.height) {
+        ball.dy = ball.jumpHeight;
+      }
+    });
 
-// Handle ball jump
-window.addEventListener('keydown', (e) => {
-  if (e.code === 'Space' && ball.y + ball.radius >= canvas.height) {
-    ball.dy = ball.jumpHeight;
-  }
-});
+    // Update game state
+    function update() {
+      if (isGameOver) return;
 
-// Update game state
-function update() {
-  if (isGameOver) return;
+      // Ball physics
+      ball.dy += ball.gravity;
+      ball.y += ball.dy;
 
-  // Ball physics
-  ball.dy += ball.gravity;
-  ball.y += ball.dy;
+      // Prevent ball from falling through the floor
+      if (ball.y + ball.radius > canvas.height) {
+        ball.y = canvas.height - ball.radius;
+        ball.dy = 0;
+      }
 
-  // Prevent ball from falling through the floor
-  if (ball.y + ball.radius > canvas.height) {
-    ball.y = canvas.height - ball.radius;
-    ball.dy = 0;
-  }
+      // Increase difficulty more gradually as score increases
+      if (score > 0 && score % 10 === 0) {
+        obstacleSpeed += 0.2; // Increase obstacle speed gradually
+      }
 
-  // Move obstacles and check for collisions
-  obstacles.forEach((obstacle, index) => {
-    obstacle.x -= 5;
+      // Move obstacles and check for collisions
+      obstacles.forEach((obstacle, index) => {
+        obstacle.x -= obstacleSpeed;
 
-    // Remove obstacle if it goes off-screen
-    if (obstacle.x + obstacle.width < 0) {
-      obstacles.splice(index, 1);
-      score++;
+        // Remove obstacle if it goes off-screen
+        if (obstacle.x + obstacle.width < 0) {
+          obstacles.splice(index, 1);
+          score++;
+        }
+
+        // Check collision
+        if (
+          ball.x + ball.radius > obstacle.x &&
+          ball.x - ball.radius < obstacle.x + obstacle.width &&
+          ball.y + ball.radius > obstacle.y
+        ) {
+          endGame();
+        }
+      });
     }
 
-    // Check collision
-    if (
-      ball.x + ball.radius > obstacle.x &&
-      ball.x - ball.radius < obstacle.x + obstacle.width &&
-      ball.y + ball.radius > obstacle.y
-    ) {
-      endGame();
+    // Draw game objects
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw ball
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#ff5733';
+      ctx.fill();
+      ctx.closePath();
+
+      // Draw obstacles
+      obstacles.forEach(obstacle => {
+        ctx.fillStyle = '#333';
+        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+      });
+
+      // Update score
+      scoreDisplay.textContent = `Score: ${score}`;
     }
-  });
-}
 
-// Draw game objects
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // End the game
+    function endGame() {
+      isGameOver = true;
+      gameOverScreen.style.display = 'flex';
+      finalScore.textContent = score;
+    }
 
-  // Draw ball
-  ctx.beginPath();
-  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-  ctx.fillStyle = '#ff5733';
-  ctx.fill();
-  ctx.closePath();
+    // Restart the game
+    restartButton.addEventListener('click', () => {
+      ball = { x: 50, y: 300, radius: 15, dy: 0, jumpHeight: -15, gravity: 0.5 };
+      obstacles = [];
+      score = 0;
+      obstacleSpeed = 5; // Reset obstacle speed
+      isGameOver = false;
+      gameOverScreen.style.display = 'none';
+      gameLoop();
+    });
 
-  // Draw obstacles
-  obstacles.forEach(obstacle => {
-    ctx.fillStyle = '#333';
-    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-  });
+    // Game loop
+    function gameLoop() {
+      if (isGameOver) return;
 
-  // Update score
-  scoreDisplay.textContent = `Score: ${score}`;
-}
+      update();
+      draw();
 
-// End the game
-function endGame() {
-  isGameOver = true;
-  gameOverScreen.style.display = 'flex';
-  finalScore.textContent = score;
-}
+      requestAnimationFrame(gameLoop);
+    }
 
-// Restart the game
-restartButton.addEventListener('click', () => {
-  ball = { x: 50, y: 300, radius: 15, dy: 0, jumpHeight: -12, gravity: 0.5 };
-  obstacles = [];
-  score = 0;
-  isGameOver = false;
-  gameOverScreen.style.display = 'none';
-  gameLoop();
-});
-
-// Game loop
-function gameLoop() {
-  if (isGameOver) return;
-
-  update();
-  draw();
-
-  requestAnimationFrame(gameLoop);
-}
-
-// Start the game
-gameLoop();
-</script>
+    // Start the game
+    gameLoop();
+  </script>
 </body>
 </html>
