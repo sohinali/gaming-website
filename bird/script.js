@@ -97,7 +97,27 @@ function gameOver() {
     ctx.font = "30px Arial";
     ctx.textAlign = "center"; // Center the Game Over text
     ctx.fillText("Game Over!", canvas.width / 2, canvas.height / 2);
+
+    // Show the popup
+    document.getElementById('finalScore').innerText = score;
+    document.getElementById('popup').style.display = 'flex'; // Show popup
 }
+
+// Reset the game
+document.getElementById('resetBtn').addEventListener('click', () => {
+    score = 0;
+    pipes = [];
+    bird.y = 150;
+    bird.velocity = 0;
+    gameRunning = true;
+    document.getElementById('popup').style.display = 'none'; // Hide popup
+    update(); // Restart the game loop
+});
+
+// Back to homepage
+document.getElementById('backBtn').addEventListener('click', () => {
+    window.location.href = '../index.html'; // Replace with your homepage URL
+});
 
 // Event listener for keyboard
 document.addEventListener('keydown', (e) => {
