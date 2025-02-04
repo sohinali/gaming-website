@@ -100,11 +100,21 @@ function gameOver() {
     ctx.fillText("Game Over!", canvas.width / 2 - 80, canvas.height / 2);
 }
 
+// Event listener for keyboard
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning) {
         bird.velocity = -3;
     }
     if(e.code === 'Space' && !gameRunning){
+        location.reload();
+    }
+});
+
+// Event listener for touch (Tap to jump)
+document.addEventListener('touchstart', () => {
+    if (gameRunning) {
+        bird.velocity = -3;
+    } else {
         location.reload();
     }
 });
