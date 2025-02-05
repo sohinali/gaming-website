@@ -1,58 +1,77 @@
 body {
-    background-color: skyblue;
-    margin: 0;
-    overflow: hidden; /* Prevent scrollbars */
-    display: flex;
-    flex-direction: column; /* Stack canvas and score container vertically */
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    min-height: 100vh;      /* Ensure full viewport height */
+  background-color: skyblue;
+  margin: 0;
+  overflow: hidden; /* Prevent scrollbars */
+  display: flex;
+  flex-direction: column; /* Stack canvas and score container vertically */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  min-height: 100vh;       /* Ensure full viewport height */
 }
 
 #scoreContainer {
-    position: absolute;
-    top: 20px; /* Position it at the top */
-    text-align: center;
-    font-size: 24px;
-    font-family: Arial, sans-serif;
-    color: black;
+  position: absolute;
+  top: 20px; /* Position it at the top */
+  text-align: center;
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+  color: black;
 }
 
 #gameCanvas {
-    background-color: lightblue;
-    border: 5px solid black;
-    display: block; /* Prevents a small gap below the canvas */
+  background-color: lightblue;
+  border: 5px solid black;
+  display: block; /* Prevents a small gap below the canvas */
 }
+
+/* Countdown Overlay styling */
+#countdownOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 50px;
+  color: white;
+  z-index: 1000;
+}
+
+/* Popup styling */
 .popup {
-    display: none; /* Hide the popup initially */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-family: Arial, sans-serif;
+  display: none; /* Hide the popup initially */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 .popup-content {
-    background-color: #333;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
+  background-color: #333;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
 }
 
 button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
 }
 
 button:hover {
-    background-color: #555;
+  background-color: #555;
 }
