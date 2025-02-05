@@ -16,7 +16,7 @@ let score = 0;
 let gameRunning = false; // Game will start after countdown
 
 const birdImage = new Image();
-birdImage.src = 'bird.png'; // Path to your bird image
+birdImage.src = 'birds.png'; // Path to your bird image
 
 // Start the countdown after the bird image loads
 birdImage.onload = () => {
