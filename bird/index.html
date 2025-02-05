@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flappy Bird </title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Bird</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="scoreContainer">
-        <span id="scoreText">Score: 0</span>
-    </div>
-    
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="scoreContainer">
+    <span id="scoreText">Score: 0</span>
+  </div>
 
-    <!-- Popup form -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <h2>Game Over</h2>
-            <p>Your Score: <span id="finalScore">0</span></p>
-            <button id="resetBtn">Reset Game</button>
-            <button id="backBtn">Back to Homepage</button>
-        </div>
-    </div>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
 
-    <script src="script.js"></script>
+  <!-- Countdown Overlay -->
+  <div id="countdownOverlay">
+    <div id="countdownContent">
+      <span id="countdownTimer">3</span>
+    </div>
+  </div>
+
+  <!-- Popup form -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <h2>Game Over</h2>
+      <p>Your Score: <span id="finalScore">0</span></p>
+      <button id="resetBtn">Reset Game</button>
+      <button id="backBtn">Back to Homepage</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
